@@ -5,7 +5,10 @@ export interface IOriginalFlashcard {
 }
 
 export interface IRawFlashcard extends IOriginalFlashcard {
-	id: number;
+	// id: number;
+
+	_id: string;
+	languageText: string;
 }
 
 export interface IFlashcard extends IRawFlashcard {
@@ -19,5 +22,5 @@ export interface IFlashcard extends IRawFlashcard {
 export const blankNewFlashcard: IOriginalFlashcard = {
 	category: '',
 	front: '',
-	back: ''
-}
+	back: '',
+};

@@ -48,7 +48,7 @@ interface IAppProvider {
 	children: React.ReactNode;
 }
 
-const backendUrl = 'http://localhost:3515';
+const backendUrl = 'http://localhost:3516';
 const notify = (message: string) => toast(message);
 
 export const AppContext = createContext<IAppContext>({} as IAppContext);
@@ -106,7 +106,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 			};
 			_flashcards.push(_flashcard);
 		});
-		_flashcards = tools.sortArrayOfObjects(_flashcards, 'id', 'desc');
+		_flashcards = tools.sortArrayOfObjects(_flashcards, '_id', 'desc');
 		setFlashcards(_flashcards);
 	};
 
@@ -190,11 +190,11 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 
 	const handleConfirmDeleteFlashcard = async (flashcard: IFlashcard) => {
 		try {
-			await axios.delete(`${backendUrl}/flashcard/${flashcard.id}`, {
+			await axios.delete(`${backendUrl}/flashcard/${flashcard._id}`, {
 				withCredentials: true,
 			});
 			const _flashcards = flashcards.filter(
-				(m: IFlashcard) => m.id !== flashcard.id
+				(m: IFlashcard) => m._id !== flashcard._id
 			);
 			setFlashcards(_flashcards);
 			notify('Flashcard was deleted.');
@@ -253,7 +253,7 @@ export const AppProvider: React.FC<IAppProvider> = ({ children }) => {
 		try {
 			// save in backend
 			await axios.put(
-				`${backendUrl}/flashcard/${flashcard.id}`,
+				`${backendUrl}/flashcard/${flashcard._id}`,
 				{
 					flashcard: {
 						category: flashcard.originalItem.category,

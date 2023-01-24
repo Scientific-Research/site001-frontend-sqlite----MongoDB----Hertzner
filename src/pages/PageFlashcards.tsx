@@ -120,7 +120,7 @@ export const PageFlashcards = () => {
 			<div className="flashcards">
 				{flashcards.map((flashcard) => {
 					return (
-						<Flashcard key={flashcard.id} flashcard={flashcard} />
+						<Flashcard key={flashcard._id} flashcard={flashcard} />
 					);
 				})}
 			</div>
